@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0d0c0a;
+  --panel: #14130f;
+  --panel-2: #1a1813;
+  --line: #2a2720;
+  --line-strong: #3a362c;
+  --ink: #ece6da;
+  --ink-2: #b5ad9e;
+  --ink-3: #7d7668;
+  --amber: #f2a93b;
+  --amber-ink: #1d1406;
+  --red: #ef5b4c;
+  --red-bg: #2a1411;
+  --green: #5fc48a;
+  --green-bg: #0f2318;
+  --blue: #7aa7ff;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-amber: var(--amber);
+  --color-amber-ink: var(--amber-ink);
+  --color-red: var(--red);
+  --color-red-bg: var(--red-bg);
+  --color-green: var(--green);
+  --color-green-bg: var(--green-bg);
+  --color-blue: var(--blue);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+.num {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--amber-ink);
+}
+
+/* Hairline grid texture behind the hero, like graph paper in a lab notebook. */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgba(236, 230, 218, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(236, 230, 218, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 520ms var(--ease-out) both;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+.scanning {
+  position: relative;
+  overflow: hidden;
+}
+.scanning::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 25%;
+  background: linear-gradient(90deg, transparent, rgba(242, 169, 59, 0.12), transparent);
+  animation: scanline 1.4s var(--ease-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .scanning::after {
+    animation: none;
+  }
+}
