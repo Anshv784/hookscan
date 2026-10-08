@@ -57,7 +57,7 @@ bun scripts/index.ts      # writes data/snapshot.json (about 30 min on a free RP
 npm run dev
 ```
 
-A GitHub Action reruns the census every two hours and commits the snapshot.
+A GitHub Action reruns the census every six hours and commits the snapshot.
 
 ## Layout
 
