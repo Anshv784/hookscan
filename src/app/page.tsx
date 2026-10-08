@@ -314,7 +314,7 @@ function refusalQuotes(hooks: typeof snapshot.hooks) {
         ["transfer", s.tests.transfer],
       ] as const) {
         if (!r.ran || r.ok || !r.blockedByHook || !r.reason) continue;
-        if (/^custom program error|^Custom program error|panick|Unsupported program id|^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(r.reason))
+        if (/^custom program error|^Custom program error|panick|Unsupported program id|additional account keys|^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(r.reason))
           continue;
         const key = r.reason.replace(/\d+/g, "#").toLowerCase();
         if (seen.has(key)) continue;
