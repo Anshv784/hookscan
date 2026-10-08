@@ -1,8 +1,7 @@
 name: census
 
+# Manual only: one run costs roughly 15k RPC credits, and the live site shares the same key.
 on:
-  schedule:
-    - cron: "17 */6 * * *"
   workflow_dispatch:
 
 permissions:
