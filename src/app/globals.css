@@ -17,6 +17,18 @@
   --green-bg: #0f2318;
   --blue: #7aa7ff;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Semantic aliases (shared component vocabulary) */
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--panel);
+  --muted: var(--panel-2);
+  --muted-foreground: var(--ink-2);
+  --border: var(--line);
+  --primary: var(--amber);
+  --primary-foreground: var(--amber-ink);
+  --destructive: var(--red);
+  --ring: var(--amber);
 }
 
 @theme inline {
@@ -35,6 +47,16 @@
   --color-green: var(--green);
   --color-green-bg: var(--green-bg);
   --color-blue: var(--blue);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

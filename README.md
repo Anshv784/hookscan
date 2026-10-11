@@ -2,7 +2,7 @@
 
 **Read the rules before you buy.** HookScan scans every Meteora Dynamic Bonding Curve pool whose token has a Token-2022 transfer hook, tells you what that hook will and won't let you do, and trades the ones that let outsiders in.
 
-Live: https://hookscan.anshverma.tech · API: https://hookscan.anshverma.tech/docs
+Live: https://hookscan.anshverma.tech · App: [/app](https://hookscan.anshverma.tech/app) · Docs: [/docs](https://hookscan.anshverma.tech/docs)
 
 ## Why
 
@@ -58,7 +58,7 @@ Mainnet deployment is one `solana program deploy` away (about 0.19 SOL of rent).
 
 ## API
 
-No key needed. See [/docs](https://hookscan.anshverma.tech/docs).
+No key needed. See [/docs/api](https://hookscan.anshverma.tech/docs/api).
 
 ```
 GET  /api/scan/{mint|pool}   fresh scan of one coin

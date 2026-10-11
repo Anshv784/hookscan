@@ -6,20 +6,20 @@ import { Addr, Progress, SectionHead, StatusChip, short, sol } from "@/component
 import { dominantStatus, hookByProgram, hookLabel, snapshot } from "@/lib/data";
 import type { Status } from "@/lib/core/scan";
 
-export async function generateMetadata(props: PageProps<"/hook/[program]">): Promise<Metadata> {
+export async function generateMetadata(props: PageProps<"/app/hooks/[program]">): Promise<Metadata> {
   const { program } = await props.params;
   return { title: `${hookLabel(program) ?? short(program)} hook — HookScan` };
 }
 
-export default function HookPage(props: PageProps<"/hook/[program]">) {
+export default function HookPage(props: PageProps<"/app/hooks/[program]">) {
   return (
-    <Suspense fallback={<div className="mx-auto h-96 max-w-7xl px-4 py-8 sm:px-6" />}>
+    <Suspense fallback={<div className="h-96" />}>
       <Hook params={props.params} />
     </Suspense>
   );
 }
 
-async function Hook({ params }: { params: PageProps<"/hook/[program]">["params"] }) {
+async function Hook({ params }: { params: PageProps<"/app/hooks/[program]">["params"] }) {
   const { program } = await params;
   const h = hookByProgram.get(program);
   if (!h) notFound();
@@ -31,9 +31,9 @@ async function Hook({ params }: { params: PageProps<"/hook/[program]">["params"]
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="w-full">
       <nav className="mb-6 text-xs text-ink-3">
-        <Link href="/#rules" className="hover:text-ink">
+        <Link href="/app/hooks" className="hover:text-ink">
           Hooks
         </Link>{" "}
         <span aria-hidden>/</span> <span className="num">{short(program, 6)}</span>
@@ -76,7 +76,7 @@ async function Hook({ params }: { params: PageProps<"/hook/[program]">["params"]
           {sameKey.map((o, i) => (
             <span key={o.program}>
               {i > 0 && ", "}
-              <Link className="underline" href={`/hook/${o.program}`}>
+              <Link className="underline" href={`/app/hooks/${o.program}`}>
                 {hookLabel(o.program) ?? short(o.program)}
               </Link>{" "}
               ({o.pools} coins)
@@ -126,7 +126,7 @@ async function Hook({ params }: { params: PageProps<"/hook/[program]">["params"]
               {h.samples.map((s) => (
                 <li key={s.pool} className="px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <Link href={`/coin/${s.mint}`} className="font-medium hover:text-amber">
+                    <Link href={`/app/coin/${s.mint}`} className="font-medium hover:text-amber">
                       {s.symbol ?? short(s.mint)}
                     </Link>
                     <StatusChip status={s.status} />
@@ -164,7 +164,7 @@ async function Hook({ params }: { params: PageProps<"/hook/[program]">["params"]
               {coins.slice(0, 200).map((c) => (
                 <tr key={c.pool} className="hover:bg-panel/60">
                   <td className="px-4 py-2">
-                    <Link href={`/coin/${c.mint}`} className="hover:text-amber">
+                    <Link href={`/app/coin/${c.mint}`} className="hover:text-amber">
                       <span className="font-medium">{c.symbol || short(c.mint)}</span> <span className="text-xs text-ink-3">{c.name}</span>
                     </Link>
                   </td>

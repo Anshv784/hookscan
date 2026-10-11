@@ -17,7 +17,7 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
       setBad(true);
       return;
     }
-    router.push(`/coin/${v}`);
+    router.push(`/app/coin/${v}`);
   }
 
   return (

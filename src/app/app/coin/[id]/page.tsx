@@ -7,21 +7,21 @@ function lookup(id: string) {
   return snapshot.coins.find((c) => c.mint === id || c.pool === id) ?? null;
 }
 
-export async function generateMetadata(props: PageProps<"/coin/[id]">): Promise<Metadata> {
+export async function generateMetadata(props: PageProps<"/app/coin/[id]">): Promise<Metadata> {
   const { id } = await props.params;
   const c = lookup(id);
   return { title: c ? `${c.symbol ?? "Coin"} — HookScan` : "Scan — HookScan" };
 }
 
-export default function CoinPage(props: PageProps<"/coin/[id]">) {
+export default function CoinPage(props: PageProps<"/app/coin/[id]">) {
   return (
-    <Suspense fallback={<div className="mx-auto h-96 max-w-7xl px-4 py-8 sm:px-6" />}>
+    <Suspense fallback={<div className="h-96" />}>
       <Coin params={props.params} />
     </Suspense>
   );
 }
 
-async function Coin({ params }: { params: PageProps<"/coin/[id]">["params"] }) {
+async function Coin({ params }: { params: PageProps<"/app/coin/[id]">["params"] }) {
   const { id } = await params;
   const c = lookup(id);
   return <CoinView id={id} known={c ? { ...c, hookLabel: hookLabel(c.hook) } : null} />;

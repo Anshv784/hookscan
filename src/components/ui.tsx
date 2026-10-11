@@ -100,7 +100,7 @@ export function Progress({ value }: { value: number | null }) {
 
 export function HookName({ program, label }: { program: string; label: string | null }) {
   return (
-    <Link href={`/hook/${program}`} className="group flex flex-col">
+    <Link href={`/app/hooks/${program}`} className="group flex flex-col">
       <span className="font-medium text-ink group-hover:text-amber">{label ?? "unnamed hook"}</span>
       <span className="num text-[11px] text-ink-3">{short(program, 4)}</span>
     </Link>

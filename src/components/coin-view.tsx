@@ -53,10 +53,10 @@ export function CoinView({ id, known }: { id: string; known: Known }) {
   const mint = report?.mint.mint ?? known?.mint ?? id;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="w-full">
       <nav className="mb-6 text-xs text-ink-3">
-        <Link href="/" className="hover:text-ink">
-          Census
+        <Link href="/app/coins" className="hover:text-ink">
+          Coins
         </Link>{" "}
         <span aria-hidden>/</span> <span className="num">{short(mint, 6)}</span>
       </nav>
@@ -81,7 +81,7 @@ export function CoinView({ id, known }: { id: string; known: Known }) {
                 hook{" "}
                 <Link
                   className="num text-ink-2 underline decoration-line-strong underline-offset-2 hover:text-ink"
-                  href={`/hook/${report?.hook?.program ?? known?.hook}`}
+                  href={`/app/hooks/${report?.hook?.program ?? known?.hook}`}
                 >
                   {known?.hookLabel ?? report?.hook?.label ?? short((report?.hook?.program ?? known?.hook)!)}
                 </Link>
@@ -221,7 +221,7 @@ function Rules({ report }: { report: CoinReport }) {
     <section className="rounded-lg border border-line">
       <div className="flex items-center justify-between border-b border-line px-5 py-3">
         <h2 className="text-sm font-medium">Rules written into the hook&apos;s code</h2>
-        <Link href={`/hook/${h.program}`} className="text-xs text-amber hover:underline">
+        <Link href={`/app/hooks/${h.program}`} className="text-xs text-amber hover:underline">
           All coins on this hook →
         </Link>
       </div>
