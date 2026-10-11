@@ -1,0 +1,25 @@
+hookguard on a Surfpool fork of Solana mainnet (2026-10-11), real Meteora DBC pool and real SPEC.fun hook.
+Command: RPC_URL=http://localhost:8899 bun scripts/guard-fork-e2e.ts trader.json 2uG28kKjfYGGBebpjipUnMuagQSBRm5FqgiSNf7B6gbN
+
+pool 2uG28kKjfYGGBebpjipUnMuagQSBRm5FqgiSNf7B6gbN
+hook FKTNiFexa4dFRgKwGjJLwmwNH8pocfyUuKdGvcZGeSSa  programdata 6ZHnnD1LSkSc4xHjUyacTckqVbmLycLZNoJPFcnu3DJb
+
+1. attest the hook as open
+  ✓ set_verdict(open)
+  verdict pinned deploy slot 453436681, upgrade key DXFqi6tXYGjavSCXEV7NHGYwsaWMqSszrx6VKcg6yUNq
+2. guarded buy, 0.1 SOL
+  ✓ assert_hook + swap2_with_transfer_hook
+  balance 1800784.710751
+3. the hook's owner redeploys it (fork cheatcode bumps the programdata deploy slot)
+4. same trades after the redeploy
+  ✕ guarded buy  HookChanged: the hook was redeployed after it was checked
+  ✓ unguarded buy
+  balance 3594267.1494
+5. HookScan re-tests the new build and attests it again
+  ✓ set_verdict(open)
+  ✓ guarded buy
+  balance 5380491.642692
+
+Devnet deployment: program C3wRkdrAx9tr8FqfGuBEtLrnjpDZEb5aA9Dz2Kbv8ABv
+  set_verdict 5gzSCytw7Zu8anDBuAGfnv92wf6EVYGzkEtdE5ya1rjDSGpGSXv7qy9ENgdgrBVaCfhu1nLuxo35Ye58sDPkcsAC
+  assert_hook 2c3xjTM9N2pX7CNPrRRi5t8asuPSp1KdEaB4HNt7GTA2Qtfx42tM1bD5rNFoQVMbCQa8GCazaYfjnTakMZovct6p

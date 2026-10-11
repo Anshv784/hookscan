@@ -67,6 +67,29 @@ export default function Docs() {
         {`curl ${BASE}/api/snapshot | jq '.totals'`}
       </Endpoint>
 
+      <section className="mt-12">
+        <SectionHead kicker="On-chain" title="hookguard: revert if the hook changed">
+          A verdict is only true for the build we tested. hookguard pins it to the hook&apos;s deploy slot and upgrade key, read on-chain,
+          and <code className="num text-ink">assert_hook</code> in the same transaction as your swap fails the trade if either changed.
+          Devnet:{" "}
+          <a
+            className="num underline"
+            href="https://explorer.solana.com/address/C3wRkdrAx9tr8FqfGuBEtLrnjpDZEb5aA9Dz2Kbv8ABv?cluster=devnet"
+          >
+            C3wRkdr…8ABv
+          </a>
+          .
+        </SectionHead>
+        <pre className="num overflow-x-auto rounded-lg border border-line bg-panel p-4 text-[12px] leading-relaxed text-ink-2">{`import { assertHookIx } from "hookscan/guard";
+
+const tx = new Transaction().add(
+  assertHookIx(HOOKSCAN_ATTESTER, hookProgram, hookProgramData, ["open"]),
+  ...swapInstructions, // swap2_with_transfer_hook
+);
+// Reverts with HookChanged / AuthorityChanged / HookClosed / StatusNotAllowed
+// if the hook isn't the exact build the attester tested.`}</pre>
+      </section>
+
       <section className="mt-12 rounded-lg border border-amber/30 bg-amber/5 p-5 text-sm leading-relaxed text-ink-2">
         <h3 className="font-medium text-ink">Why trades built with the Meteora SDK can fail</h3>
         <p className="mt-2">

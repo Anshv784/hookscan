@@ -37,6 +37,25 @@ For every DBC transfer-hook pool on mainnet:
 | DBC pool authority | Identified as the hook authority on curve-phase mints, so the scanner knows the hook is revoked at graduation |
 | `@meteora-ag/dynamic-bonding-curve-sdk` | Program, coder and state readers; its own hook resolution is reproduced to show where it fails |
 
+## hookguard (on-chain)
+
+`programs/hookguard` is a 26 KB Pinocchio program that closes the gap a scanner can't: a hook that passed our tests can be redeployed with new rules a minute later. 89% of live hook coins sit on hooks that can be.
+
+- `set_verdict` writes an attester's verdict for a hook program. The program itself reads the hook's identity from the BPF loader (programdata deploy slot and upgrade authority) and pins it; the attester can't fake it.
+- `assert_hook` goes in the same transaction as a swap. At execution time it re-reads the hook's identity and fails the whole transaction if the hook was redeployed, its upgrade key changed, the program was closed, the verdict is from an attester the caller doesn't trust, or the verdict isn't one the caller accepts.
+- `close_verdict` returns the rent to the attester.
+
+Anyone can be an attester (verdicts are PDAs of `["verdict", attester, hook]`), and any terminal can add the one guard instruction.
+
+| | |
+| --- | --- |
+| Devnet | [`C3wRkdrAx9tr8FqfGuBEtLrnjpDZEb5aA9Dz2Kbv8ABv`](https://explorer.solana.com/address/C3wRkdrAx9tr8FqfGuBEtLrnjpDZEb5aA9Dz2Kbv8ABv?cluster=devnet) |
+| Tests | 14 Mollusk tests on the compiled program: `cd programs/hookguard && cargo build-sbf && cargo test` |
+| Mainnet fork | Real SPEC.fun pool on a Surfpool fork: guarded buy passes, hook redeployed, guarded buy reverts with `HookChanged` while an unguarded one goes through. Output in [`docs/hookguard-fork-run.txt`](docs/hookguard-fork-run.txt), script in `scripts/guard-fork-e2e.ts` |
+| Client | `src/lib/core/guard.ts` (`setVerdictIx`, `assertHookIx`, `decodeVerdict`) |
+
+Mainnet deployment is one `solana program deploy` away (about 0.19 SOL of rent).
+
 ## API
 
 No key needed. See [/docs](https://hookscan.anshverma.tech/docs).

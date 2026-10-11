@@ -1,4 +1,5 @@
 // Usage: RPC_URL=... bun scripts/sdk-hook-repro.ts <TransferHookPool> <holder wallet>
+/* eslint-disable @typescript-eslint/no-explicit-any -- standalone repro that calls the SDK exactly as a user would */
 // Minimal repro: DynamicBondingCurveClient.pool.swap2WithTransferHook resolves hook extra accounts
 // with PublicKey.default as source/destination/owner.
 import { Connection, PublicKey, TransactionMessage, VersionedTransaction } from "@solana/web3.js";
