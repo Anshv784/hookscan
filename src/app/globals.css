@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0d0c0a;
-  --panel: #14130f;
-  --panel-2: #1a1813;
-  --line: #2a2720;
-  --line-strong: #3a362c;
-  --ink: #ece6da;
-  --ink-2: #b5ad9e;
-  --ink-3: #7d7668;
-  --amber: #f2a93b;
-  --amber-ink: #1d1406;
-  --red: #ef5b4c;
-  --red-bg: #2a1411;
-  --green: #5fc48a;
-  --green-bg: #0f2318;
-  --blue: #7aa7ff;
+  /* Meteora palette: indigo-black base, yellow -> orange -> violet signature gradient */
+  --bg: #0b0b12;
+  --panel: #13131d;
+  --panel-2: #1b1b29;
+  --line: #262638;
+  --line-strong: #36364d;
+  --ink: #f5f5ff;
+  --ink-2: #a3a3bf;
+  --ink-3: #6c6c89;
+  --amber: #f5bd00;
+  --amber-ink: #1a1300;
+  --orange: #f54b00;
+  --violet: #6e45ff;
+  --red: #ff4d5e;
+  --red-bg: #2a1119;
+  --green: #34d399;
+  --green-bg: #0d2420;
+  --blue: #8b6cff;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --brand-gradient: linear-gradient(110deg, #f5bd00 0%, #f54b00 45%, #6e45ff 100%);
 
   /* Semantic aliases (shared component vocabulary) */
   --background: var(--bg);
@@ -25,10 +29,10 @@
   --muted: var(--panel-2);
   --muted-foreground: var(--ink-2);
   --border: var(--line);
-  --primary: var(--amber);
-  --primary-foreground: var(--amber-ink);
+  --primary: var(--orange);
+  --primary-foreground: #ffffff;
   --destructive: var(--red);
-  --ring: var(--amber);
+  --ring: var(--orange);
 }
 
 @theme inline {
@@ -47,6 +51,8 @@
   --color-green: var(--green);
   --color-green-bg: var(--green-bg);
   --color-blue: var(--blue);
+  --color-orange: var(--orange);
+  --color-violet: var(--violet);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -57,7 +63,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-destructive: var(--destructive);
   --color-ring: var(--ring);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -68,8 +74,8 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-feature-settings: "ss01", "cv11";
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01", "ss03";
   -webkit-font-smoothing: antialiased;
 }
 
@@ -129,6 +135,43 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .scanning::after {
+    animation: none;
+  }
+}
+
+/* Meteora signature gradient helpers */
+.text-brand {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bg-brand {
+  background: var(--brand-gradient);
+}
+.border-brand {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--panel), var(--panel)) padding-box,
+    linear-gradient(120deg, rgba(245, 189, 0, 0.55), rgba(245, 75, 0, 0.45) 40%, rgba(110, 69, 255, 0.55)) border-box;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 60s linear infinite;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
     animation: none;
   }
 }

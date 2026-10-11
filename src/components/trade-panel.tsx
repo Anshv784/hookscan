@@ -150,7 +150,7 @@ export function TradePanel({ report }: { report: CoinReport }) {
             <label className="mt-1 block text-xs text-ink-3" htmlFor="amt">
               {side === "buy" ? "You pay (SOL)" : `You sell (${symbol})`}
             </label>
-            <div className="mt-1.5 flex items-center rounded-md border border-line bg-bg focus-within:border-amber">
+            <div className="mt-1.5 flex items-center rounded-md border border-line bg-bg focus-within:border-primary">
               <input
                 id="amt"
                 inputMode="decimal"
@@ -235,7 +235,7 @@ export function TradePanel({ report }: { report: CoinReport }) {
             {!publicKey ? (
               <button
                 onClick={() => setVisible(true)}
-                className="mt-4 h-11 w-full rounded-md bg-amber font-medium text-amber-ink transition-[filter] hover:brightness-110"
+                className="mt-4 h-11 w-full bg-brand rounded-xl font-medium text-white transition-[filter] hover:brightness-110"
               >
                 Connect wallet
               </button>
@@ -243,7 +243,7 @@ export function TradePanel({ report }: { report: CoinReport }) {
               <button
                 onClick={send}
                 disabled={busy !== null}
-                className="mt-4 h-11 w-full rounded-md bg-amber font-medium text-amber-ink transition-[filter] hover:brightness-110 disabled:opacity-60"
+                className="mt-4 h-11 w-full bg-brand rounded-xl font-medium text-white transition-[filter] hover:brightness-110 disabled:opacity-60"
               >
                 {busy === "send" ? "Waiting for confirmation…" : `Sign & ${side}`}
               </button>
@@ -251,7 +251,7 @@ export function TradePanel({ report }: { report: CoinReport }) {
               <button
                 onClick={review}
                 disabled={busy !== null || !rawAmount}
-                className="mt-4 h-11 w-full rounded-md border border-line-strong font-medium transition-colors hover:border-amber hover:text-amber disabled:opacity-50"
+                className="mt-4 h-11 w-full rounded-md border border-line-strong font-medium transition-colors hover:border-primary hover:text-primary disabled:opacity-50"
               >
                 {busy === "quote" ? "Simulating your trade…" : "Simulate my trade"}
               </button>

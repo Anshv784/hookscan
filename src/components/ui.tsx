@@ -91,7 +91,7 @@ export function Progress({ value }: { value: number | null }) {
   return (
     <span className="flex items-center gap-2">
       <span className="h-1 w-16 overflow-hidden rounded-full bg-line" aria-hidden>
-        <span className="block h-full bg-amber" style={{ width: `${Math.max(2, value * 100)}%` }} />
+        <span className="bg-brand block h-full" style={{ width: `${Math.max(2, value * 100)}%` }} />
       </span>
       <span className="num text-ink-2">{(value * 100).toFixed(value < 0.1 ? 1 : 0)}%</span>
     </span>

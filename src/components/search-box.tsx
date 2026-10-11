@@ -36,14 +36,14 @@ export function SearchBox({ compact = false }: { compact?: boolean }) {
         autoComplete="off"
         placeholder={compact ? "Scan a mint or pool…" : "Paste a mint or DBC pool address"}
         aria-invalid={bad}
-        className={`num w-full rounded-md border bg-panel text-ink placeholder:text-ink-3 outline-none transition-colors focus:border-amber ${
+        className={`num w-full rounded-xl border bg-panel placeholder:font-sans text-ink placeholder:text-ink-3 outline-none transition-colors focus:border-primary ${
           bad ? "border-red" : "border-line"
         } ${compact ? "h-9 px-3 text-xs" : "h-12 px-4 pr-28 text-sm"}`}
       />
       {!compact && (
         <button
           type="submit"
-          className="absolute right-1.5 top-1.5 h-9 rounded bg-amber px-4 text-sm font-medium text-amber-ink transition-[filter] hover:brightness-110"
+          className="absolute right-1.5 top-1.5 h-9 bg-brand rounded-lg px-4 text-sm font-medium text-white transition-[filter] hover:brightness-110"
         >
           Scan
         </button>

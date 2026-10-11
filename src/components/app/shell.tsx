@@ -79,18 +79,20 @@ function ActivePills() {
 }
 
 function Pills({ pathname }: { pathname: string }) {
-  const pill = (active: boolean) =>
-    `inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-      active ? "bg-muted text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
-    }`;
   return (
-    <div className="flex items-center gap-1 rounded-full border border-border bg-card/60 p-1">
+    <div className="flex h-16 items-stretch gap-1">
       {APP_LINKS.map((l) => {
         const active = isActive(pathname, l.href);
         return (
-          <Link key={l.href} href={l.href} aria-current={active ? "page" : undefined} className={pill(active)}>
+          <Link
+            key={l.href}
+            href={l.href}
+            aria-current={active ? "page" : undefined}
+            className={`relative inline-flex items-center gap-2 px-3 text-sm transition-colors ${active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+          >
             <l.icon className={`size-4 ${active ? "text-primary" : ""}`} aria-hidden />
             {l.label}
+            {active && <span className="bg-brand absolute inset-x-2 -bottom-px h-0.5 rounded-full" aria-hidden />}
           </Link>
         );
       })}
@@ -119,7 +121,7 @@ export function WalletButton() {
     return (
       <button
         onClick={() => setVisible(true)}
-        className="inline-flex h-9 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground transition-[filter] hover:brightness-110"
+        className="bg-brand inline-flex h-9 items-center gap-2 rounded-xl px-4 text-sm font-medium text-white transition-[filter] hover:brightness-110"
       >
         <Wallet className="size-4" aria-hidden /> Connect
       </button>

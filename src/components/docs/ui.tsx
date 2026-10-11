@@ -34,8 +34,10 @@ export function DocsSidebar() {
                 key={d.href}
                 href={d.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-md px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                  active ? "bg-primary/10 font-medium text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                className={`relative rounded-md px-3 py-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  active
+                    ? "bg-muted font-medium text-foreground before:absolute before:bg-[image:var(--brand-gradient)] before:inset-y-1.5 before:left-0 before:w-0.5 before:rounded-full"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
               >
                 {d.title}
@@ -87,7 +89,7 @@ export function PageNav() {
 export function DocTitle({ eyebrow, title, lead }: { eyebrow: string; title: string; lead: string }) {
   return (
     <header className="mb-10 flex flex-col gap-3">
-      <p className="text-sm font-medium text-primary">{eyebrow}</p>
+      <p className="text-brand w-fit text-sm font-semibold">{eyebrow}</p>
       <h1 className="text-4xl font-semibold tracking-tight text-balance">{title}</h1>
       <p className="max-w-2xl text-lg leading-8 text-muted-foreground">{lead}</p>
     </header>

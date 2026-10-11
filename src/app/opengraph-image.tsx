@@ -9,9 +9,9 @@ export default function OG() {
   const t = snapshot.totals;
   const upgradeablePct = Math.round((t.poolsOnUpgradeableHooks / Math.max(1, t.pools - t.graduated)) * 100);
   const stats: [string, string, string][] = [
-    [t.curve.toLocaleString("en-US"), "on the curve, not on Jupiter", "#ece6da"],
-    [`${upgradeablePct}%`, "on hooks whose rules can change", "#f2a93b"],
-    [t.curvePoolsByStatus.broken.toLocaleString("en-US"), "frozen by their own hook", "#ef5b4c"],
+    [t.curve.toLocaleString("en-US"), "on the curve, not on Jupiter", "#f5f5ff"],
+    [`${upgradeablePct}%`, "on hooks whose rules can change", "#f54b00"],
+    [t.curvePoolsByStatus.broken.toLocaleString("en-US"), "frozen by their own hook", "#ff4d5e"],
   ];
   return new ImageResponse(
     <div
@@ -20,14 +20,14 @@ export default function OG() {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        background: "#0d0c0a",
-        color: "#ece6da",
+        background: "#0b0b12",
+        color: "#f5f5ff",
         padding: 72,
         fontFamily: "sans-serif",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, color: "#f2a93b" }}>
-        <div style={{ width: 36, height: 36, border: "3px solid #f2a93b", borderRadius: 7 }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 30, color: "#f54b00" }}>
+        <div style={{ width: 36, height: 36, border: "3px solid #f54b00", borderRadius: 7 }} />
         HookScan
       </div>
       <div
@@ -42,7 +42,7 @@ export default function OG() {
         }}
       >
         <span>
-          <span style={{ color: "#f2a93b" }}>{t.pools.toLocaleString("en-US")}</span>&nbsp;Meteora coins run their own code on every
+          <span style={{ color: "#f54b00" }}>{t.pools.toLocaleString("en-US")}</span>&nbsp;Meteora coins run their own code on every
           transfer.
         </span>
       </div>
@@ -54,13 +54,13 @@ export default function OG() {
               display: "flex",
               flexDirection: "column",
               flex: 1,
-              border: "2px solid #2a2720",
+              border: "2px solid #262638",
               borderRadius: 12,
               padding: "22px 26px",
             }}
           >
             <span style={{ fontSize: 48, color: c }}>{v}</span>
-            <span style={{ fontSize: 22, color: "#7d7668", marginTop: 6 }}>{l}</span>
+            <span style={{ fontSize: 22, color: "#a3a3bf", marginTop: 6 }}>{l}</span>
           </div>
         ))}
       </div>

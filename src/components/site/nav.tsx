@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, Code2 } from "lucide-react";
+import { ArrowUpRight, Code2 } from "lucide-react";
 import { buttonVariants } from "./button";
 import { Logo, REPO } from "./brand";
 
@@ -24,30 +24,35 @@ export function SiteNav({ children }: { children?: React.ReactNode }) {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-[background-color,border-color] duration-300 ${
-        scrolled ? "border-b border-border bg-background/75 backdrop-blur-xl" : "border-b border-transparent"
-      }`}
-    >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
+    <header className="sticky top-0 z-40 w-full px-3 pt-3 md:px-6">
+      <div
+        className={`mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border px-3 transition-[background-color,border-color,box-shadow] duration-300 md:px-4 ${
+          scrolled ? "border-border bg-background/70 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl" : "border-transparent"
+        }`}
+      >
         <Logo />
         <nav aria-label="Main" className="flex items-center gap-1">
-          <ul className="hidden items-center gap-1 md:flex">
+          <ul className="hidden items-center md:flex">
             {LINKS.map((l) => (
               <li key={l.label}>
-                <Link href={l.href} className={buttonVariants({ variant: "ghost" })}>
-                  {l.href === "/docs" && <BookOpen aria-hidden />} {l.label}
+                <Link href={l.href} className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
+                  {l.label}
                 </Link>
               </li>
             ))}
             <li>
-              <a href={REPO} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "ghost" })}>
-                <Code2 aria-hidden /> Code
+              <a
+                href={REPO}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                <Code2 className="size-4" aria-hidden /> GitHub
               </a>
             </li>
           </ul>
           {children}
-          <Link href="/app" className={buttonVariants()}>
+          <Link href="/app" className={buttonVariants({ className: "ml-2" })}>
             Launch app <ArrowUpRight aria-hidden />
           </Link>
         </nav>
